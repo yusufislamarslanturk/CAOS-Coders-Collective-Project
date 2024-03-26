@@ -1,0 +1,27 @@
+Katmanlı mimari, yazılım geliştirme sürecinde yaygın olarak kullanılan bir tasarım yöntemidir. Bu yöntem, bir uygulamanın farklı sorumluluklarına ve bileşenlerine uygun şekilde bölünmesini sağlar, böylece kodun bakımı, genişletilmesi ve yeniden kullanılabilirliği kolaylaştırır. .NET Core 5 gibi modern bir teknoloji kullanılarak geliştirilen web projeleri için katmanlı mimari, uygulamanın modüler yapısını korurken aynı zamanda temiz ve düzenli bir kod tabanı oluşturmayı amaçlar. Bu rapor, DataAccess, Business, Core, Entities, Console UI ve WebAPI olmak üzere altı farklı katmanın kullanımını ve önemini ayrıntılı olarak açıklayacak ve neden bu katmanların birlikte kullanılmasının önemli olduğunu vurgulayacaktır.
+
+1. DataAccess Katmanı:
+
+DataAccess katmanı, uygulamanın veri tabanı işlemlerini yönetir. Veritabanı bağlantıları, sorguları ve veri erişim işlemleri bu katmanda gerçekleştirilir. Bu katman, veri tabanı işlemlerinin merkezi bir noktada yönetilmesini sağlar ve veri tabanı bağımlılığını diğer katmanlardan izole eder. Entity Framework Core gibi ORM araçları, veri tabanı işlemlerini kolaylaştırmak için bu katmanda sıklıkla kullanılır.
+
+2. Business Katmanı:
+
+Business katmanı, uygulamanın iş mantığını temsil eder. Bu katmanda, iş süreçleri, doğrulama kuralları, yetkilendirme ve iş akışı kuralları tanımlanır ve uygulanır. Veri doğrulama, iş kurallarının uygulanması ve iş süreçlerinin yönetimi bu katmanda gerçekleştirilir. Veritabanı işlemleri gibi teknik ayrıntılar burada yer almaz, bunun yerine uygulamanın işlevsel gereksinimlerine odaklanılır.
+
+3. Core Katmanı:
+
+Core katmanı, uygulamanın çekirdek yapı taşlarını içerir. Bu katman, tüm projelerde paylaşılan kodları, genel yardımcı sınıfları ve araçları barındırır. Entity sınıfları, genişletme yöntemleri ve ortak araçlar bu katmanda bulunabilir. Core katmanı, uygulamanın temel bileşenlerini merkezi bir yerde tutarak kod tekrarını azaltır ve yeniden kullanılabilirliği artırır.
+
+4. Entities Katmanı:
+
+Entities katmanı, veritabanı tablolarını temsil eden sınıfları içerir. Bu sınıflar genellikle veritabanı tablolarıyla eşleştirilir ve ORM araçları tarafından kullanılır. Veri tabanı nesneleri ve ilişkileri bu katmanda tanımlanır ve diğer katmanlar tarafından kullanılır.
+
+5. Console UI Katmanı:
+
+Console UI katmanı, konsol tabanlı kullanıcı arayüzünü sağlar. Bu katmanda, konsol üzerinden kullanıcı girişi alınabilir, işlemler gerçekleştirilebilir ve sonuçlar gösterilebilir. Özellikle geliştirme ve hata ayıklama aşamalarında kullanışlıdır.
+
+6. WebAPI Katmanı:
+
+WebAPI katmanı, dış dünyayla iletişim kurulmasını sağlar. HTTP protokolü üzerinden gelen isteklere yanıt verir ve genellikle JSON veya XML gibi veri formatlarını kullanarak veri döndürür. RESTful servislerin tanımlandığı ve uygulandığı katmandır. Diğer uygulamaların veya istemcilerin uygulamanın işlevlerine erişmesini sağlar.
+
+Bu katmanlar, uygulamanın farklı sorumluluklarını ve bileşenlerini belirli bir düzende organize ederek, kodun daha okunabilir, bakımı daha kolay ve genişletilmesi daha esnek olmasını sağlar. Katmanlı mimari, büyük ve karmaşık projelerde özellikle faydalıdır çünkü kodun modüler yapısı, ekibi daha etkin bir şekilde işbirliği yapmaya teşvik eder ve uzun vadede sürdürülebilirlik sağlar.
