@@ -1,0 +1,248 @@
+body, html {
+    font-family: 'Arial', sans-serif; /* Daha modern bir font tercih edin */
+    font-size: 13px;
+    line-height: 1.6;
+    background: #503C3C;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+
+canvas {
+    cursor: pointer;
+    width: 70%;
+    height: 90%;
+    float: right;
+    
+}
+
+#help {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: #3E3232; /* Daha yumuşak bir mavi tonu */
+    color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+
+#help ul {
+    margin: 0;
+    padding: 0;
+}
+
+#help li {
+    list-style-type: none;
+    font-size: 16px;
+}
+
+#help kbd {
+    font-family: monospace;
+    font-size: 20px;
+    width: 22px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+#help h1 {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: right;
+    margin: 10px 5px 5px 0;
+}
+
+#help h1 a {
+    color: #aaf;
+    text-decoration: none;
+}
+
+#help select {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#stats {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#stats a {
+    color: #aaf;
+    text-decoration: none;
+}
+
+#stats a:hover {
+    text-decoration: underline;
+}
+
+#stats select {
+    width: 100%;
+    margin-top: 5px;
+}
+
+#stats p {
+    margin: 0;
+    padding: 0;
+}
+
+#stats p span {
+    display: inline-block;
+    width: 80px;
+}
+
+#stats p a {
+    color: #aaf;
+    text-decoration: none;
+}
+
+#stats p a:hover {
+    text-decoration: underline;
+}
+
+#stats p a:visited {
+    color: #aaf;
+}
+
+#stats p a:visited:hover {
+    text-decoration: underline;
+}
+
+#stats p a:active {
+    color: #aaf;
+}
+
+#stats p a:active:hover {
+    text-decoration: underline;
+}
+
+#stats p a:link {
+    color: #aaf;
+}
+
+#stats p a:link:hover {
+    text-decoration: underline;
+}
+
+#stats p a:link:visited {
+    color: #aaf;
+}
+
+#stats p a:link:visited:hover {
+    text-decoration: underline;
+}
+
+#stats p a:link:active {
+    color: #aaf;
+}
+
+#stats p a:link:active:hover {
+    text-decoration: underline;
+}
+
+#stats p a:link:active:visited {
+    color: #aaf;
+}
+
+
+.site-footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    
+    background-color: #7E6363; /* Footer için yeni arka plan rengi */
+    color: #fff;
+    text-align: center;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.2); /* Alt gölge efekti */
+}
+
+.site-footer hr
+{
+  border-top-color:#bbb;
+  opacity:0.5
+}
+.site-footer hr.small
+{
+  margin:20px 0
+}
+.site-footer h6
+{
+  color:#fff;
+  font-size:16px;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+}
+.site-footer a
+{
+  color:#737373;
+}
+.site-footer a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links
+{
+  padding-left:0;
+  list-style:none
+}
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+  }
+.slider {
+-webkit-appearance: none;  /* Override default CSS styles */
+appearance: none;
+width: 50%; /* Full-width */
+height: 15px; /* Specified height */
+border-radius: 5px; /* Rounded slider */
+padding-top: 4px;
+padding-bottom: 4px;
+
+background: #d3d3d3; /* Grey background */
+outline: none; /* Remove outline */
+opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+-webkit-transition: .2s; /* 0.2 seconds transition on hover */
+transition: opacity .2s;
+}
+.slider:hover {
+opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+-webkit-appearance: none; /* Override default look */
+appearance: none;
+width: 25px; /* Set a specific slider handle width */
+height: 25px; /* Slider handle height */
+border-radius: 50%;
+background: #04AA6D; /* Green background */
+cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+width: 25px; /* Set a specific slider handle width */
+height: 25px; /* Slider handle height */
+background: #04AA6D; /* Green background */
+border-radius: 50%;
+cursor: pointer; /* Cursor on hover */
+}
+select {
+    width: 100%; /* Genişletilmiş seçim kutuları */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7;     
+    outline: none;
+  }
