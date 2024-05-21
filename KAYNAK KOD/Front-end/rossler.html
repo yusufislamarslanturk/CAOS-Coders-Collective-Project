@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rossler System</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" href="rossler.css"/>
+    <script src="js/rossler.js" defer></script>
+    <script src="js/rosslerControls.js" defer></script>
+    <script src="js/rosslermain.js" defer></script>
+
+  </head>
+  <body>
+    <div id="help">
+      <ul>
+        <li><kbd></kbd>
+          <label>Sol tıka basılı tutup sürükleyerek x/y uzayında döndürebilirsiniz.</label>
+        </li>
+        <li><kbd></kbd>
+          <label>Mouse orta tuşuna basılı tutarak sağa sola üste ve alta hareket ettirebilirsiniz.</label>
+        </li>
+        <li><kbd></kbd>
+          <label>shift + sol tık ile grafiği z ekseninde çevirebilirsiniz.</label>
+        </li>
+        <li><kbd></kbd>
+          <label>mouse ile zoom yapabilirsiniz.</label>
+        </li>
+        <li><kbd></kbd>
+          <label>boşluk tuşu ile durdurup tekrar devam ettirebilirsiniz.</label>
+        </li>
+        <li><kbd></kbd>
+          <label>h tuşu ile noktaları gizleyebilirsiniz.</label>
+
+        </li>
+        <li><kbd></kbd>
+          <label>[ tuşu ile kuyruk uzunluğunu azaltabilirsiniz.</label>
+
+        </li>
+        <li><kbd></kbd>
+          <label>] tuşu ile kuyruk uzunluğunu arttırabilirsiniz.</label>
+
+        </li>
+        <li><kbd></kbd>
+          <label>d tuşu ile dönüşsel sürtünmeyi açıp kapatabilirsiniz.</label>
+
+        </li>
+        <li><kbd></kbd>
+          <label>? tuşu ile bu menüyü açıp kapatabilirsiniz.</label>
+
+        </li> 
+       
+        <div class="slidecontainer">
+          <li>
+            <input class="slider" id="length" type="range" min="2" max="12" step="1"/>
+            <label>tail = <span id="length-label"></span></label>
+          </li>
+          <li>
+            <input class="slider" id="sigma" type="range" min="-1" max="20" step="0.01"/>
+            <label>&sigma; = <span id="sigma-label"></span></label>
+          </li>
+          <li>
+            <input class="slider" id="beta" type="range" min="0" max="20" step="0.01"/>
+            <label>&beta; = <span id="beta-label"></span></label>
+          </li>
+          <li>
+            <input class="slider" id="rho" type="range" min="0" max="300" step="0.01"/>
+            <label>&rho; = <span id="rho-label"></span></label>
+          </li>
+        </div>
+        <li>
+          <select id="lorenz">
+            <option disabled selected>-- Rossler System --</option>
+            <option value="lorenzselected">Lorenz System</option>
+          </select>
+        </li>
+        <li>
+          <select id="preset">
+            <option disabled selected>-- presets --</option>
+            <option value="chaos">Chaos Demo</option>
+            
+            <option value="gentle">Gentle Rotation</option>
+            <option value="bendy">Bendy</option>
+          </select>
+        </li>
+      </ul>
+    <br>
+    <br>
+      <div id="stats"></div>
+    </div>
+    <canvas id="rossler"></canvas>
+ 
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            
+            <p class="text-justify">Rossler çekicisi, Otto Rössler tarafından 1970’lerde incelenen Rossler sistemi için bir çekicidir. Rossler sistemi, üç doğrusal olmayan diferansiyel denklemle tanımlanan sürekli zamanlı bir dinamik sistemdir.  </p>
+          </div>   
+        </div>
+       
+      </div>
+   
+  </footer>
+  </body>
+</html>
