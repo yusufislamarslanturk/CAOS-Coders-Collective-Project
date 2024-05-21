@@ -2,6 +2,8 @@
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace WebAPI.Controllers
 {
@@ -9,18 +11,25 @@ namespace WebAPI.Controllers
     [ApiController]
     public class RosslerController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult RosslerMethod([FromBody] RosslerParameters parameters)
+
+        private readonly LorenzService _lorenzService;
+
+        public RosslerController()
         {
-            double[] s = parameters.InitialState;
-            double dt = parameters.Dt;
-            double σ = parameters.σ;
-            double β = parameters.β;
-            double ρ = parameters.ρ;
+            _lorenzService = new LorenzService();
+        }
 
-            RosslerManager.RosslerMethod(s, dt, σ, β, ρ);
+        [HttpPost]
+        [Route("nextstate")]
+        public IActionResult GetNextState([FromBody] double[] currentState)
+        {
+            if (currentState.Length != 3)
+            {
+                return BadRequest("State must contain exactly 3 values.");
+            }
 
-            return Ok(s);
+            var nextState = _lorenzService.ComputeNextState(currentState);
+            return Ok(nextState);
         }
     }
 }

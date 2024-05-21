@@ -14,4 +14,5 @@ namespace Entities.Concrete
         public double β { get; set; }
         public double ρ { get; set; }
     }
+
 }

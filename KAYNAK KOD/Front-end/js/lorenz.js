@@ -12,15 +12,12 @@ function Lorenz(canvas) {
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
     this.params = {
-      
         sigma: 10,
         beta: 8/3,
         rho: 28,
         step_size: 0.007,
         steps_per_frame: 1,
         paused: false
-
-        
     };
     this.display = {
         scale: 1 / 25,
@@ -201,8 +198,7 @@ Lorenz.color = function(i) {
 
 
 /**
- * Update s to the next Lorenz state using RK4.
- * Performs no allocations and hopefully JITs very effectively.
+ * Update s to the next Lorenz state using the .NET backend.
  * @param {!number[3]} s
  * @param {!number}    dt
  * @param {!number}    σ
@@ -210,46 +206,11 @@ Lorenz.color = function(i) {
  * @param {!number}    ρ
  * @returns {undefined}
  */
-Lorenz.lorenz = function(s, dt, σ, β, ρ) {
-    function dx(x, y, z) { return σ * (y - x); }
-    function dy(x, y, z) { return x * (ρ - z) - y; }
-    function dz(x, y, z) { return x * y - β * z; }
-
-    var x = s[0];
-    var y = s[1];
-    var z = s[2];
-
-    var k1dx = dx(x, y, z);
-    var k1dy = dy(x, y, z);
-    var k1dz = dz(x, y, z);
-
-    var k2x = x + k1dx * dt / 2;
-    var k2y = y + k1dy * dt / 2;
-    var k2z = z + k1dz * dt / 2;
-
-    var k2dx = dx(k2x, k2y, k2z);
-    var k2dy = dy(k2x, k2y, k2z);
-    var k2dz = dz(k2x, k2y, k2z);
-
-    var k3x = x + k2dx * dt / 2;
-    var k3y = y + k2dy * dt / 2;
-    var k3z = z + k2dz * dt / 2;
-
-    var k3dx = dx(k3x, k3y, k3z);
-    var k3dy = dy(k3x, k3y, k3z);
-    var k3dz = dz(k3x, k3y, k3z);
-
-    var k4x = x + k3dx * dt;
-    var k4y = y + k3dy * dt;
-    var k4z = z + k3dz * dt;
-
-    var k4dx = dx(k4x, k4y, k4z);
-    var k4dy = dy(k4x, k4y, k4z);
-    var k4dz = dz(k4x, k4y, k4z);
-
-    s[0] = x + (k1dx + 2*k2dx + 2*k3dx + k4dx) * dt / 6;
-    s[1] = y + (k1dy + 2*k2dy + 2*k3dy + k4dy) * dt / 6;
-    s[2] = z + (k1dz + 2*k2dz + 2*k3dz + k4dz) * dt / 6;
+Lorenz.lorenz = async function(s, dt, σ, β, ρ) {
+    const nextState = await fetchNextLorenzState(s);
+    s[0] = nextState[0];
+    s[1] = nextState[1];
+    s[2] = nextState[2];
 };
 
 /**
@@ -268,9 +229,6 @@ Lorenz.prototype._update = function(a, b) {
         var sublength = b - a + 1;
         for (var s = 0; s < this.solutions.length; s++)  {
             var offset = s * 3 * length * 4 + 3 * a * 4;
-            /* As far as I can tell, this buffer view is optimized out.
-             * Therefore no allocation actually happens. Whew!
-             */
             var view = new Float32Array(buffer, offset, sublength * 3);
             gl.bufferSubData(gl.ARRAY_BUFFER, offset, view);
         }
@@ -281,7 +239,7 @@ Lorenz.prototype._update = function(a, b) {
  * Advance the system state by one frame.
  * @returns {Lorenz} this
  */
-Lorenz.prototype.step = function() {
+Lorenz.prototype.step = async function() {
     if (!this.ready)
         return this;
     if (!this.params.paused) {
@@ -296,8 +254,8 @@ Lorenz.prototype.step = function() {
         for (var s = 0; s < this.params.steps_per_frame; s++) {
             var tail_index = this.tail_index;
             this.tail_index = (this.tail_index + 1) % length;
-            for (var i = 0; i < this.solutions.length; i++)  {
-                Lorenz.lorenz(this.solutions[i], dt, σ, β, ρ);
+            for (var i = 0; i < this.solutions.length; i++) {
+                await Lorenz.lorenz(this.solutions[i], dt, σ, β, ρ);
                 var base = i * length * 3 + tail_index * 3;
                 tail[base + 0] = this.solutions[i][0];
                 tail[base + 1] = this.solutions[i][1];
@@ -540,11 +498,43 @@ Lorenz.run = function(canvas) {
     var lorenz = new Lorenz(canvas);
     for (var i = 0; i < 13; i++)
         lorenz.add(Lorenz.generate());
-    function go() {
-        lorenz.step();
+    async function go() {
+        await lorenz.step();
         lorenz.draw();
         requestAnimationFrame(go);
     }
     requestAnimationFrame(go);
     return lorenz;
 };
+Lorenz.poincare = function(state, dt, σ, β, ρ, sectionZ = 0) {
+    // İlk adımı atla, sonraki adımları z = sectionZ düzleminde kontrol et
+    const maxSteps = 100000; // Maksimum adım sayısı
+    let poincarePoints = [];
+    
+    for (let i = 0; i < maxSteps; i++) {
+        let previousState = state.slice();
+        Lorenz.lorenz(state, dt, σ, β, ρ);
+        
+        // İki adım arasında z eksenini geçiyorsa (örneğin z = sectionZ)
+        if ((previousState[2] < sectionZ && state[2] >= sectionZ) ||
+            (previousState[2] >= sectionZ && state[2] < sectionZ)) {
+            poincarePoints.push([state[0], state[1]]); // Poincare kesişimi
+        }
+    }
+    
+    return poincarePoints;
+};
+
+
+// Fetch API function to get the next state from the backend
+async function fetchNextLorenzState(currentState) {
+    const response = await fetch('https://localhost:44396/api/Rossler/nextstate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(currentState)
+    });
+    const data = await response.json();
+    return data;
+}

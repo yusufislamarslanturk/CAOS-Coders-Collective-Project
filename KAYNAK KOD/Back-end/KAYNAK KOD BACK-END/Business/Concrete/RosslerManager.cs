@@ -51,4 +51,5 @@ namespace Business.Concrete
             s[2] = z + (k1dz + 2 * k2dz + 2 * k3dz + k4dz) * dt / 6;
         }
     }
+
 }
