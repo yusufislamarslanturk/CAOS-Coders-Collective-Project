@@ -1,0 +1,13 @@
+Zayıf Yönler: 
+-Projemizi back tarafıyla entegre ettiğimizde hız düşüklüğü gözlemledik. 
+-Projemiz süresinde 1 toplantımız koordinasyon sorunu sebebiyle iptaş edildi. 
+-Projemizin back-end bağlantısını planlanan iş planından 1 gün sonrasonda tamamladık. 
+-Projemize planladığımız kadar harita entegre edemedik.
+-Projemizde kaos haritalarını günlük hayata uygulama konusunda bazı rakiplerimizden geride kaldık. 
+-Rakiplerimiz daha fazla kaos haritası kullanırken biz daha az olsa da daha etkili kullandık. 
+-Ekibimizdeki her üyenin farklı düzeyde yazılım bilgisi olduğunu belirledikten sonra beceri üzerine iş planı yaparak bu zayıflığı fırsata çevirdik. Genel anlamda farklı becerilere sahip olsak da Sayın Master'ımızın başarılı yürütücülüğü sayesinde projemizi iş planımızdan az miktar zaman sapmasıyla sonuca ulaştırdık. 
+
+Fırsatlar: 
+-Kaos haritalarının 3 boyutlu görselleştirmesini sağlarken ekibin doğru insanlardan oluşmasının avantajıyla Sn. Emre DİNÇ arkadaşımız başarıyla üstesinden geldi. 
+-Çoğu ekipte aşılamayacak olarak görülen problemleri doğru ekip arkadaşları seçmemizin avantajıyla başarıya ulaştırabildik. 
+-
